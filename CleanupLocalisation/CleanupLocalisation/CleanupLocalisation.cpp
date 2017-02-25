@@ -8,8 +8,7 @@ int main()
 
     std::vector<std::string> STNHFiles = {
         "Output\\STH_event_l_english.yml",
-        "Output\\STH_tech_and_components_l_english.yml",
-        "Output\\STH_text_l_english.yml"
+        "Output\\STH_l_english.yml"
     };
 
     std::regex regexer(" +(.+?):0");
