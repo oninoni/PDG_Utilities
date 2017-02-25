@@ -1,5 +1,4 @@
 // CleanupLocalisation.cpp : Defines the entry point for the console application.
-//
 
 #include "stdafx.h"
 
@@ -74,7 +73,6 @@ int main()
 
             file.close();
             std::cout << "Loaded " << fileName << std::endl;
-
 
             if (fileShouldOutput) {
                 fileName = "Output\\" + std::string(nPtr);
