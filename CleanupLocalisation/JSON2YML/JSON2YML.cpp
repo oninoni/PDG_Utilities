@@ -23,8 +23,6 @@ int main()
     std::regex escapeExp("\\\\([^])");
     std::regex languageExp("<lang>");
 
-    std::unordered_map<std::string, std::vector<std::string>> translations;
-
     std::smatch matches;
 
     std::vector<std::pair<std::string, std::string>> filenames = {
@@ -47,6 +45,7 @@ int main()
         inputfile.seekg(0, std::ios::beg);
         int64_t modvalue = size / 100;
         int64_t counter = 0;
+        std::unordered_map<std::string, std::vector<std::string>> translations;        
 
         while (!inputfile.eof())
         {
