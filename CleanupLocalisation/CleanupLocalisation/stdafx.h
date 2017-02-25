@@ -17,4 +17,8 @@
 
 #include <regex>
 
+#include <Windows.h>
+#include <atlbase.h>
+#include <atlconv.h>
+
 // TODO: reference additional headers your program requires here
