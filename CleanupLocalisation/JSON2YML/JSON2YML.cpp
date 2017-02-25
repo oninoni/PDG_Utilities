@@ -3,8 +3,6 @@
 
 #include "stdafx.h"
 
-#include <Windows.h>
-
 void setCursorVisible(bool visible)
 {
     CONSOLE_CURSOR_INFO cursorinfo;
@@ -19,51 +17,92 @@ void setCursorVisible(bool visible)
 
 int main()
 {
-    WCHAR* test = L"hallo";
-    std::string(test);
-
     setCursorVisible(false);          
 
     std::regex translationExp("\"[^(]+\\(([^)]+)\\)\" *: *\"( *[^:]+:0 *[^]*)\"");
     std::regex escapeExp("\\\\([^])");
+    std::regex languageExp("<lang>");
 
     std::unordered_map<std::string, std::vector<std::string>> translations;
 
     std::smatch matches;
 
-    std::ifstream inputfile("NewHorizons - Localization.json");
+    std::vector<std::pair<std::string, std::string>> filenames = {
+        {"NewHorizons - Localization.json", "STH_l_<lang>.yml"},
+        {"NewHorizons - Events Localization.json", "STH_events_l_<lang>.yml"}
+    };
 
-    if (!inputfile.is_open())
-    {
-        std::cout << "Could not find file!" << std::endl;
-        return 0;
+    for (auto filename : filenames)
+    {                     
+        std::ifstream inputfile("Input\\" + filename.first);
+
+        if (!inputfile.is_open())
+        {
+            std::cout << "Could not find file!" << std::endl;
+            return 0;
+        }
+
+        inputfile.seekg(0, std::ios::end);
+        int64_t size = inputfile.tellg();
+        inputfile.seekg(0, std::ios::beg);
+        int64_t modvalue = size / 100;
+        int64_t counter = 0;
+
+        while (!inputfile.eof())
+        {
+            while (counter <= 0)
+            {
+                std::cout << "\rLoading: " << inputfile.tellg() * 100 / size << "%";
+                counter += modvalue;
+            }
+            std::string line;
+            std::getline(inputfile, line);
+            counter -= line.size();
+
+            if (std::regex_search(line, matches, translationExp))
+            {
+                std::string text = std::regex_replace(matches[2].str(), escapeExp, "$1");
+                translations[matches[1]].push_back(text);
+            }
+        }
+        std::cout << "\rLoading: 100%" << std::endl;
+        inputfile.close();
+
+        std::cout << "Writing..." << std::endl;
+
+        for (auto entry : translations)
+        {
+            std::string language = entry.first;
+            const std::vector<std::string>& lines = entry.second;
+
+            std::cout << language << std::endl;
+
+            std::transform(language.begin(), language.end(), language.begin(), tolower);
+            std::string name = std::regex_replace(filename.second, languageExp, language);
+            std::ofstream output("Output\\" + name);
+
+            if (!output.is_open())
+            {
+                std::cout << "Could not write to file " << name << std::endl;
+                continue;
+            }
+
+            int64_t bom = '¿»ï';
+            output.write((char*)&bom, 3);
+            output << "################\\" << std::endl;
+            output << "# " << language << " translation" << std::endl;
+            output << "##################\\" << std::endl;
+            output << std::endl;
+            output << "l_" << language << ":" << std::endl;
+
+            for (const std::string& line : lines)
+            {
+                output << line << std::endl;
+            }
+
+            output.close();
+        }
     }
-      
-    inputfile.seekg(0, std::ios::end);
-    int64_t size = inputfile.tellg();
-    inputfile.seekg(0, std::ios::beg);
-    int64_t modvalue = size / 100;
-    int64_t counter = 0;
-
-    while (!inputfile.eof())
-    {
-        while (counter <= 0)
-        {
-            std::cout << "\rLoading: " << inputfile.tellg() * 100 / size << "%";
-            counter += modvalue;
-        }
-        std::string line;
-        std::getline(inputfile, line);
-        counter -= line.size();
-
-        if (std::regex_search(line, matches, translationExp))
-        {
-            std::string text = std::regex_replace(matches[2].str(), escapeExp, "$1");
-            translations[matches[1]].push_back(text);
-        }
-    }   
-    std::cout << "\rLoading: 100%" << std::endl;
-    inputfile.close();   
 
     return 0;
 }

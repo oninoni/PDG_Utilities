@@ -38,21 +38,15 @@ int main()
 
     if (h != INVALID_HANDLE_VALUE) {
         do {
-            char*   nPtr = new char[lstrlen(data.cFileName) + 1];
-            for (int i = 0; i < lstrlen(data.cFileName); i++)
-                nPtr[i] = char(data.cFileName[i]);
-
-            nPtr[lstrlen(data.cFileName)] = '\0';
-
-            std::string fileName = "VanillaFiles\\" + std::string(nPtr);
+            std::wstring fileName = _T("VanillaFiles\\") + std::wstring(data.cFileName);
             bool fileShouldOutput = false;
 
-            std::cout << "Loading " << fileName << std::endl;
+            std::wcout << "Loading " << fileName << std::endl;
             std::ifstream file(fileName);
             std::vector<std::string> fileData;
 
             if (!file.is_open()) {
-                std::cout << "Error opening \"" << fileName << "\"!! :(" << std::endl;
+                std::wcout << "Error opening \"" << fileName << "\"!! :(" << std::endl;
                 continue;
             }
 
@@ -72,18 +66,18 @@ int main()
             }
 
             file.close();
-            std::cout << "Loaded " << fileName << std::endl;
+            std::wcout << "Loaded " << fileName << std::endl;
 
             if (fileShouldOutput) {
-                fileName = "Output\\" + std::string(nPtr);
+                fileName = _T("Output\\") + std::wstring(data.cFileName);
                 std::ofstream outFile(fileName);
                 for (std::string line : fileData) {
                     outFile << line << std::endl;
                 }
                 outFile.close();
-                std::cout << "Saved " << fileName << std::endl;
+                std::wcout << "Saved " << fileName << std::endl;
             } else {
-                std::cout << "Not writing \"" << fileName << "\", because it's not used." << std::endl;
+                std::wcout << "Not writing \"" << fileName << "\", because it's not used." << std::endl;
             }
         } while (FindNextFile(h, &data));
     }
