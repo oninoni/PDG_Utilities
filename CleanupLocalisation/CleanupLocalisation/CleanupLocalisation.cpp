@@ -26,7 +26,7 @@ int main()
         std::string line;
         while (!file.eof()) {
             std::getline(file, line);
-            if (std::regex_search(line, matches, identExp, std::regex_constants::match_continuous)) {
+            if (std::regex_search(line, matches, keyExp, std::regex_constants::match_continuous)) {
                 usedTags.insert(matches[1]);
             }
         }
@@ -57,7 +57,7 @@ int main()
             std::string line;
             while (!file.eof()) {
                 std::getline(file, line);
-                if (std::regex_search(line, matches, identExp, std::regex_constants::match_continuous)) {
+                if (std::regex_search(line, matches, keyExp, std::regex_constants::match_continuous)) {
                     if (usedTags.find(matches[1]) == usedTags.end()) {
                         fileData.push_back(line);
                     } else {
