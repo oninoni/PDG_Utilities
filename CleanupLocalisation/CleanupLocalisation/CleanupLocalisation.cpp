@@ -74,7 +74,7 @@ int main()
             if (fileChanged) {
                 fileName = _T("Output\\") + std::wstring(data.cFileName);
                 std::ofstream outFile(fileName);
-                for (std::string line : fileData) 
+                for (std::string line : fileData)
                     outFile << std::regex_replace(line, emptystringExp, "$1\"\\n\"") << std::endl;
                 outFile.close();
                 std::wcout << "[UPDATED] \"" << fileName << "\"" << std::endl;
