@@ -166,6 +166,8 @@ int main()
             // End of Old Code
 
         } while (FindNextFile(folderH, &folderData));
+
+        FindClose(folderH);
     }else {
         std::cout << "VanillaFiles folder missing!" << std::endl;
     }
