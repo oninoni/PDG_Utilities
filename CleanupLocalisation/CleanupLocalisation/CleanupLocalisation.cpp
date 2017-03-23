@@ -23,8 +23,8 @@ int main()
     std::wstring deutschKorrektur = L"deutschkorrektur_l_german.yml";
 
     std::vector<std::wstring> STNHFiles = {
-        L"Output\\STH_event_l_<lang>.yml",
-        L"Output\\STH_l_<lang>.yml"
+        L"Output\\<lang>\\STH_events_l_<lang>.yml",
+        L"Output\\<lang>\\STH_l_<lang>.yml"
     };
 
     std::regex keyExp("^ +(.+?):[0-9]+ +\"([^\\\"]*)\"");
@@ -50,8 +50,9 @@ int main()
             while (!file.eof()) {
                 std::getline(file, line);
                 if (std::regex_search(line, matches, keyExp, std::regex_constants::match_continuous)) {
-                    if (matches[2] != "Description WIP")
+                    if (matches[2] != "Description WIP") {
                         usedTags[language].insert(matches[1]);
+                    }
                     // else
                     //     std::cout << matches[0] << " ignored!" << std::endl;
                 }
@@ -64,7 +65,7 @@ int main()
     std::cout << " --- Checking Deutschkorrektur ---" << std::endl;
 
     std::ifstream germanCorrection(L"Input\\" + deutschKorrektur);
-    std::ofstream germanCorrectionOut(L"Output\\" + deutschKorrektur);
+    std::ofstream germanCorrectionOut(L"Output\\german\\" + deutschKorrektur);
 
     if (germanCorrection.is_open() && germanCorrectionOut.is_open()) {
         std::string line;
@@ -91,64 +92,85 @@ int main()
     germanCorrection.close();
     germanCorrectionOut.close();
 
-    WIN32_FIND_DATA data;
-    HANDLE h = FindFirstFile(L"VanillaFiles\\*.*", &data);
-
-    if (h != INVALID_HANDLE_VALUE) {
+    WIN32_FIND_DATA folderData;
+    HANDLE folderH = FindFirstFile(L"VanillaFiles\\*.*", &folderData);
+    if (folderH != INVALID_HANDLE_VALUE) {
         std::cout << " --- Updating Files ---" << std::endl;
         do {
-            if (!StrCmp(data.cFileName, _T(".")) || !StrCmp(data.cFileName, _T("..")))
+            if (!StrCmp(folderData.cFileName, _T(".")) || !StrCmp(folderData.cFileName, _T("..")))
                 continue;
+            
+            // Old Code
 
-            std::wstring filename = _T("VanillaFiles\\") + std::wstring(data.cFileName);
-            bool fileChanged = false;
+            WIN32_FIND_DATA data;
+            std::wstring folderToSearch = (L"VanillaFiles\\" + std::wstring(folderData.cFileName) + L"\\");
+            HANDLE h = FindFirstFile((folderToSearch + L"*.*").c_str(), &data);
 
-            std::ifstream file(filename);
-            std::vector<std::string> fileData;
+            if (h != INVALID_HANDLE_VALUE) {
+                do {
+                    if (!StrCmp(data.cFileName, _T(".")) || !StrCmp(data.cFileName, _T("..")))
+                        continue;
 
-            if (!file.is_open()) {
-                std::wcout << "Error opening \"" << filename << "\"!" << std::endl;
-                continue;
-            }
+                    std::wstring filename = folderToSearch + std::wstring(data.cFileName);
+                    bool fileChanged = false;
 
-            std::wstring language;
-            for (const std::pair<std::wstring, std::wregex>& entry : languageExps)
-                if (std::regex_search(filename, entry.second))
-                    language = entry.first;
+                    std::ifstream file(filename);
+                    std::vector<std::string> fileData;
 
-            std::string line;
-            while (!file.eof()) {
-                std::getline(file, line);
-                if (std::regex_search(line, matches, keyExp, std::regex_constants::match_continuous)) {
-                    if (usedTags[language].find(matches[1]) == usedTags[language].end()) {
-                        fileData.push_back(line);
-                    } else {
-                        //std::cout << "Ignoring " << matches[1] << std::endl;
-                        fileChanged = true;
+                    if (!file.is_open()) {
+                        std::wcout << "Error opening \"" << filename << "\"!" << std::endl;
+                        continue;
                     }
-                } else {
-                    fileData.push_back(line);
-                }
+
+                    std::wstring language;
+                    for (const std::pair<std::wstring, std::wregex>& entry : languageExps)
+                        if (std::regex_search(filename, entry.second))
+                            language = entry.first;
+
+                    std::string line;
+                    while (!file.eof()) {
+                        std::getline(file, line);
+                        if (std::regex_search(line, matches, keyExp, std::regex_constants::match_continuous)) {
+                            if (usedTags[language].find(matches[1]) == usedTags[language].end()) {
+                                fileData.push_back(line);
+                            } 
+                            else {
+                                //std::cout << "Ignoring " << matches[1] << std::endl;
+                                fileChanged = true;
+                            }
+                        }
+                        else {
+                            fileData.push_back(line);
+                        }
+                    }
+
+                    file.close();
+
+                    std::wstring folderToExport = (L"Output\\" + std::wstring(folderData.cFileName) + L"\\");
+                    if (fileChanged) {
+                        filename = folderToExport + std::wstring(data.cFileName);
+                        std::ofstream outFile(filename);
+                        for (std::string line : fileData)
+                            outFile << std::regex_replace(line, emptystringExp, "$1\"\\n\"") << std::endl;
+                        outFile.close();
+                        std::wcout << "[UPDATED] \"" << filename << "\"" << std::endl;
+                    }
+                    else {
+                        std::wcout << "[ignored] \"" << filename << "\"" << std::endl;
+                    }
+                } while (FindNextFile(h, &data));
             }
 
-            file.close();
+            FindClose(h);
 
-            if (fileChanged) {
-                filename = _T("Output\\") + std::wstring(data.cFileName);
-                std::ofstream outFile(filename);
-                for (std::string line : fileData) 
-                    outFile << std::regex_replace(line, emptystringExp, "$1\"\\n\"") << std::endl;
-                outFile.close();
-                std::wcout << "[UPDATED] \"" << filename << "\"" << std::endl;
-            } else {
-                std::wcout << "[ignored] \"" << filename << "\"" << std::endl;
-            }
-        } while (FindNextFile(h, &data));
-    } else {
+            // End of Old Code
+
+        } while (FindNextFile(folderH, &folderData));
+    }else {
         std::cout << "VanillaFiles folder missing!" << std::endl;
     }
 
-    FindClose(h);
+    
 
     return 0;
 }

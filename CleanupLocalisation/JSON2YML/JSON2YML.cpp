@@ -78,7 +78,7 @@ int main()
 
             std::transform(language.begin(), language.end(), language.begin(), tolower);
             std::string name = std::regex_replace(filename.second, languageExp, language);
-            std::ofstream output("Output\\" + name);
+            std::ofstream output("Output\\" + language + "\\" + name);
 
             if (!output.is_open())
             {
