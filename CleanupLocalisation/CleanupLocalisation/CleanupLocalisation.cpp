@@ -23,8 +23,8 @@ int main()
     std::wstring deutschKorrektur = L"deutschkorrektur_l_german.yml";
 
     std::vector<std::wstring> STNHFiles = {
-        L"Output\\<lang>\\STH_events_l_<lang>.yml",
-        L"Output\\<lang>\\STH_l_<lang>.yml"
+        L"Output\\localisation\\<lang>\\STH_events_l_<lang>.yml",
+        L"Output\\localisation\\<lang>\\STH_l_<lang>.yml"
     };
 
     std::regex keyExp("^ +(.+?):[0-9]+ +\"([^\\\"]*)\"");
@@ -50,11 +50,11 @@ int main()
             while (!file.eof()) {
                 std::getline(file, line);
                 if (std::regex_search(line, matches, keyExp, std::regex_constants::match_continuous)) {
-                    if (matches[2] != "Description WIP") {
+                    //if (matches[2] != "Description WIP") {
                         usedTags[language].insert(matches[1]);
-                    }
-                    // else
-                    //     std::cout << matches[0] << " ignored!" << std::endl;
+                    //}
+                    //else
+                        //std::cout << matches[0] << " ignored! | " << matches[2] << std::endl;
                 }
             }
             file.close();
@@ -156,7 +156,7 @@ int main()
                         std::wcout << "[UPDATED] \"" << filename << "\"" << std::endl;
                     }
                     else {
-                        std::wcout << "[ignored] \"" << filename << "\"" << std::endl;
+                        //std::wcout << "[ignored] \"" << filename << "\"" << std::endl;
                     }
                 } while (FindNextFile(h, &data));
             }

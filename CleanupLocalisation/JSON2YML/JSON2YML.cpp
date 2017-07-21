@@ -26,8 +26,9 @@ int main()
     std::smatch matches;
 
     std::vector<std::pair<std::string, std::string>> filenames = {
-        {"NewHorizons - Localization.json", "STH_l_<lang>.yml"},
-        {"NewHorizons - Events Localization.json", "STH_events_l_<lang>.yml"}
+        { "NewHorizons - Localization.json", "localisation\\<lang>\\STH_l_<lang>.yml" },
+        { "NewHorizons - Events Localization.json", "localisation\\<lang>\\STH_events_l_<lang>.yml" },
+        { "NewHorizons - Localization Synced.json", "localisation_synced\\STH_synced_l_<lang>.yml" }
     };
 
     for (auto filename : filenames)
@@ -78,7 +79,7 @@ int main()
 
             std::transform(language.begin(), language.end(), language.begin(), tolower);
             std::string name = std::regex_replace(filename.second, languageExp, language);
-            std::ofstream output("Output\\" + language + "\\" + name);
+            std::ofstream output("Output\\" + name);
 
             if (!output.is_open())
             {
