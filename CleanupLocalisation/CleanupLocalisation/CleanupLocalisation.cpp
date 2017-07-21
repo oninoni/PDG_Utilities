@@ -65,7 +65,7 @@ int main()
     std::cout << " --- Checking Deutschkorrektur ---" << std::endl;
 
     std::ifstream germanCorrection(L"Input\\" + deutschKorrektur);
-    std::ofstream germanCorrectionOut(L"Output\\german\\" + deutschKorrektur);
+    std::ofstream germanCorrectionOut(L"Output\\localisation\\german\\" + deutschKorrektur);
 
     if (germanCorrection.is_open() && germanCorrectionOut.is_open()) {
         std::string line;
@@ -146,7 +146,7 @@ int main()
 
                     file.close();
 
-                    std::wstring folderToExport = (L"Output\\" + std::wstring(folderData.cFileName) + L"\\");
+                    std::wstring folderToExport = (L"Output\\localisation\\" + std::wstring(folderData.cFileName) + L"\\");
                     if (fileChanged) {
                         filename = folderToExport + std::wstring(data.cFileName);
                         std::ofstream outFile(filename);
