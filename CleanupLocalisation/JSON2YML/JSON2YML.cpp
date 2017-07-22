@@ -79,28 +79,30 @@ int main()
 
             std::transform(language.begin(), language.end(), language.begin(), tolower);
             std::string name = std::regex_replace(filename.second, languageExp, language);
-            std::ofstream output("Output\\" + name);
 
-            if (!output.is_open())
-            {
-                std::cout << "Could not write to file " << name << std::endl;
-                continue;
+            if (lines.size() > 0) {
+                std::ofstream output("Output\\" + name);
+
+                if (!output.is_open()) {
+                    std::cout << "Could not write to file " << name << std::endl;
+                    continue;
+                }
+
+                int64_t bom = '¿»ï';
+                output.write((char*)&bom, 3);
+                output << "################\\" << std::endl;
+                output << "# " << language << " translation" << std::endl;
+                output << "##################\\" << std::endl;
+                output << std::endl;
+                output << "l_" << language << ":" << std::endl;
+
+                for (const std::string& line : lines) {
+                    output << line << std::endl;
+                }
+
+                output.close();
             }
 
-            int64_t bom = '¿»ï';
-            output.write((char*)&bom, 3);
-            output << "################\\" << std::endl;
-            output << "# " << language << " translation" << std::endl;
-            output << "##################\\" << std::endl;
-            output << std::endl;
-            output << "l_" << language << ":" << std::endl;
-
-            for (const std::string& line : lines)
-            {
-                output << line << std::endl;
-            }
-
-            output.close();
         }
     }
 
