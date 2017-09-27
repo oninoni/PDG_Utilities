@@ -28,6 +28,8 @@ int main()
     std::vector<std::pair<std::string, std::string>> filenames = {
         { "NewHorizons - Localization.json", "localisation\\<lang>\\STH_l_<lang>.yml" },
         { "NewHorizons - Events Localization.json", "localisation\\<lang>\\STH_events_l_<lang>.yml" },
+        { "NewHorizons - Tech Localization.json", "localisation\\<lang>\\STH_tech_l_<lang>.yml" },
+
         { "NewHorizons - Localization Synced.json", "localisation_synced\\STH_synced_l_<lang>.yml" }
     };
 
