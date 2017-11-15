@@ -26,11 +26,10 @@ int main()
     std::smatch matches;
 
     std::vector<std::pair<std::string, std::string>> filenames = {
-        { "NewHorizons - Localization.json", "localisation\\<lang>\\STH_l_<lang>.yml" },
-        { "NewHorizons - Events Localization.json", "localisation\\<lang>\\STH_events_l_<lang>.yml" },
-        { "NewHorizons - Tech Localization.json", "localisation\\<lang>\\STH_tech_l_<lang>.yml" },
-
-        { "NewHorizons - Localization Synced.json", "localisation_synced\\STH_synced_l_<lang>.yml" }
+        { "ST New Horizons - Main Localisation.json", "localisation\\<lang>\\STH_main_l_<lang>.yml" },
+        { "ST New Horizons - Events Localisation.json", "localisation\\<lang>\\STH_events_l_<lang>.yml" },
+        { "ST New Horizons - Tech Localisation.json", "localisation\\<lang>\\STH_tech_l_<lang>.yml" },
+		{ "ST New Horizons - Synced Localisation.json", "localisation_synced\\STH_synced_l_<lang>.yml" }
     };
 
     for (auto filename : filenames)

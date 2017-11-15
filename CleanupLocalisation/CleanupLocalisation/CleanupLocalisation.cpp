@@ -23,7 +23,7 @@ int main()
     std::wstring deutschKorrektur = L"deutschkorrektur_l_german.yml";
 
     std::vector<std::wstring> STNHFiles = {
-        L"Output\\localisation\\<lang>\\STH_l_<lang>.yml",
+        L"Output\\localisation\\<lang>\\STH_main_l_<lang>.yml",
         L"Output\\localisation\\<lang>\\STH_tech_l_<lang>.yml",
         L"Output\\localisation\\<lang>\\STH_events_l_<lang>.yml"
     };
