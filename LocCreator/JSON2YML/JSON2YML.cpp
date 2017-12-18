@@ -48,7 +48,7 @@ int main()
         int64_t modvalue = size / 100;
         int64_t counter = 0;
         std::unordered_map<std::string, std::vector<std::string>> translations;        
-
+		std::cout << "Starting STNH Localisation Creator..." << std::endl;
         while (!inputfile.eof())
         {
             while (counter <= 0)
