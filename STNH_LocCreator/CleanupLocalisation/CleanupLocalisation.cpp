@@ -59,7 +59,7 @@ int main()
                 }
             }
             file.close();
-            std::wcout << "Loaded " << filename << std::endl;
+            std::wcout << "[LOADED] \"" << filename << "\""<< std::endl;
         }
     }
    
@@ -169,6 +169,9 @@ int main()
         } while (FindNextFile(folderH, &folderData));
 
         FindClose(folderH);
+		std::cout << " " << std::endl;
+		std::cout << "Localisation Creation Successful!" << std::endl;
+		std::cout << " " << std::endl;
     }else {
         std::cout << "VanillaFiles folder missing!" << std::endl;
     }

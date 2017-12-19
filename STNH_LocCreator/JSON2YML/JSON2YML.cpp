@@ -31,6 +31,9 @@ int main()
         { "ST New Horizons - Tech Localisation.json", "localisation\\<lang>\\STH_tech_l_<lang>.yml" },
 		{ "ST New Horizons - Synced Localisation.json", "localisation_synced\\STH_synced_l_<lang>.yml" }
     };
+	std::cout << "#############################################" << std::endl;
+	std::cout << "### Starting STNH Localisation Creator... ###" << std::endl;
+	std::cout << "#############################################" << std::endl;
 
     for (auto filename : filenames)
     {                     
@@ -47,9 +50,9 @@ int main()
         inputfile.seekg(0, std::ios::beg);
         int64_t modvalue = size / 100;
         int64_t counter = 0;
-        std::unordered_map<std::string, std::vector<std::string>> translations;        
-		std::cout << "Starting STNH Localisation Creator..." << std::endl;
-        while (!inputfile.eof())
+        std::unordered_map<std::string, std::vector<std::string>> translations;
+		
+		while (!inputfile.eof())
         {
             while (counter <= 0)
             {
