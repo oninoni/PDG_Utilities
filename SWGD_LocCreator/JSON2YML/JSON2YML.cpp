@@ -34,6 +34,7 @@ int main()
 	std::cout << "#############################################" << std::endl;
 	std::cout << "### Starting SWGD Localisation Creator... ###" << std::endl;
 	std::cout << "#############################################" << std::endl;
+
     for (auto filename : filenames)
     {                     
         std::ifstream inputfile("Input\\" + filename.first);
@@ -49,8 +50,9 @@ int main()
         inputfile.seekg(0, std::ios::beg);
         int64_t modvalue = size / 100;
         int64_t counter = 0;
-        std::unordered_map<std::string, std::vector<std::string>> translations;        
-        while (!inputfile.eof())
+        std::unordered_map<std::string, std::vector<std::string>> translations;
+		
+		while (!inputfile.eof())
         {
             while (counter <= 0)
             {

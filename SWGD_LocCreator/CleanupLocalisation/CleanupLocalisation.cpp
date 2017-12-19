@@ -57,10 +57,10 @@ int main()
                 }
             }
             file.close();
-            std::wcout << "Loaded " << filename << std::endl;
+            std::wcout << "[LOADED] \"" << filename << "\""<< std::endl;
         }
     }
-
+   
     WIN32_FIND_DATA folderData;
     HANDLE folderH = FindFirstFile(L"VanillaFiles\\*.*", &folderData);
     if (folderH != INVALID_HANDLE_VALUE) {
@@ -140,7 +140,6 @@ int main()
 		std::cout << " " << std::endl;
 		std::cout << "Localisation Creation Successful!" << std::endl;
 		std::cout << " " << std::endl;
-
     }else {
         std::cout << "VanillaFiles folder missing!" << std::endl;
     }
