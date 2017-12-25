@@ -26,10 +26,7 @@ int main()
     std::smatch matches;
 
     std::vector<std::pair<std::string, std::string>> filenames = {
-        { "ST New Horizons - Main Localisation.json", "localisation\\<lang>\\STH_main_l_<lang>.yml" },
-        { "ST New Horizons - Events Localisation.json", "localisation\\<lang>\\STH_events_l_<lang>.yml" },
-        { "ST New Horizons - Tech Localisation.json", "localisation\\<lang>\\STH_tech_l_<lang>.yml" },
-		{ "ST New Horizons - Synced Localisation.json", "localisation_synced\\STH_synced_l_<lang>.yml" }
+        { "SW A Galaxy Divided - Main Localisation.json", "localisation\\<lang>\\SWG_main_l_<lang>.yml" }
     };
 	std::cout << "#############################################" << std::endl;
 	std::cout << "### Starting SWGD Localisation Creator... ###" << std::endl;

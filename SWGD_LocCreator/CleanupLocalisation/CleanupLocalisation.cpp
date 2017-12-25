@@ -21,9 +21,7 @@ int main()
         languageExps[language] = std::wregex(language);
 
     std::vector<std::wstring> STNHFiles = {
-        L"Output\\localisation\\<lang>\\STH_main_l_<lang>.yml",
-        L"Output\\localisation\\<lang>\\STH_tech_l_<lang>.yml",
-        L"Output\\localisation\\<lang>\\STH_events_l_<lang>.yml"
+        L"Output\\localisation\\<lang>\\SWG_main_l_<lang>.yml"
     };
 
     std::regex keyExp("^ +(.+?):[0-9]+ +\"([^\\\"]*)\"");
@@ -138,7 +136,7 @@ int main()
 
         FindClose(folderH);
 		std::cout << " " << std::endl;
-		std::cout << "Localisation Creation Successful!" << std::endl;
+		std::cout << "Done!" << std::endl;
 		std::cout << " " << std::endl;
     }else {
         std::cout << "VanillaFiles folder missing!" << std::endl;

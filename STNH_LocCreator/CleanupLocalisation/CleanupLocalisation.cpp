@@ -170,7 +170,7 @@ int main()
 
         FindClose(folderH);
 		std::cout << " " << std::endl;
-		std::cout << "Localisation Creation Successful!" << std::endl;
+		std::cout << "Done!" << std::endl;
 		std::cout << " " << std::endl;
     }else {
         std::cout << "VanillaFiles folder missing!" << std::endl;
