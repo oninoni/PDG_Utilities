@@ -20,6 +20,8 @@ int main()
     for (std::wstring language : languages)
         languageExps[language] = std::wregex(language);
 
+	std::wstring deutschKorrektur = L"deutschkorrektur_l_german.yml";
+
     std::vector<std::wstring> STNHFiles = {
         L"Output\\localisation\\<lang>\\SWG_main_l_<lang>.yml"
     };
@@ -58,7 +60,37 @@ int main()
             std::wcout << "[LOADED] \"" << filename << "\""<< std::endl;
         }
     }
-   
+
+	std::cout << " --- Checking Deutschkorrektur ---" << std::endl;
+
+	std::ifstream germanCorrection(L"Input\\" + deutschKorrektur);
+	std::ofstream germanCorrectionOut(L"Output\\localisation\\german\\" + deutschKorrektur);
+
+	if (germanCorrection.is_open() && germanCorrectionOut.is_open()) {
+		std::string line;
+		while (!germanCorrection.eof()) {
+			std::getline(germanCorrection, line);
+			if (std::regex_search(line, matches, keyExp, std::regex_constants::match_continuous)) {
+				if (usedTags[L"german"].find(matches[1]) == usedTags[L"german"].end()) {
+					germanCorrectionOut << line << std::endl;
+					usedTags[L"german"].insert(matches[1]);
+				}
+				else {
+					std::cout << " !!! Warning found overlap with \"Deutschkorrektur\" at: " << matches[1] << "! line is not copied to output!" << std::endl;
+				}
+			}
+			else {
+				germanCorrectionOut << line << std::endl;
+			}
+		}
+	}
+	else {
+		std::wcout << "Skipped \"" << deutschKorrektur << "\"" << std::endl;
+	}
+
+	germanCorrection.close();
+	germanCorrectionOut.close();
+
     WIN32_FIND_DATA folderData;
     HANDLE folderH = FindFirstFile(L"VanillaFiles\\*.*", &folderData);
     if (folderH != INVALID_HANDLE_VALUE) {
