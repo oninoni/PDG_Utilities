@@ -57,9 +57,6 @@ artifacts/
 *.VC.db
 *.VC.VC.opendb
 
-Output/
-Input/
-VanillaFiles/
 
 # Chutzpah Test files
 _Chutzpah*
