@@ -18,6 +18,7 @@ Currently maintained by Zoom
 # Step 1 #
 ##########
 
+IGNORE THE 'Source' FOLDER
 Copy the content of your vanilla \localisation into the 'VanillaFiles' folder of the Localisation Creator you need.
 
 ############
@@ -35,12 +36,13 @@ Because every sheet needs it's own unique settings it would be too much work to 
 ##############
 
 Put the exported .JSON files into the 'Input' folder of the Localisation Creator you need.
+(Don't worry, the deutschkorrektur_l_german.yml in there is where it should be.)
 
 ################
 #### Step 4 ####
 ################
 
-Start the .bat file in the main folder. A cmd window should pop up and start transforming the .JSON data into .yml data.
+Start the ENGAGE.bat file in the main folder. A cmd window should pop up and start transforming the .JSON data into .yml data.
 Wait until it says 'Done!' and close the window afterwards.
 
 ###################
