@@ -25,7 +25,8 @@ Copy the content of your vanilla \localisation into the 'VanillaFiles' folder of
 ## Step 2 ## 
 ############
 
-Export ALL the localisation google spreadsheets (of the mod you want to localise) via the plugin called 'Export Sheet Data' (Spreadsheets are e.g. Main Localisation, Event Localisation etc.)
+Export ALL the localisation google spreadsheets (of the mod you want to localise) via the add-on called 'Export Sheet Data' (Spreadsheets are e.g. Main Localisation, Event Localisation etc.)
+(After you've installed the add-on, navigate to a spreadsheet of your choice, then click on Add-ons (Tab in the Top Bar) -> Export Sheet Data -> Open Sidebar)
 (Link: https://chrome.google.com/webstore/detail/export-sheet-data/bfdcopkbamihhchdnjghdknibmcnfplk?utm_source=permalink) 
 
 Usually it automatically puts in the right settings. If e.g. there are no check boxes ticked, please contact Zoom. 
