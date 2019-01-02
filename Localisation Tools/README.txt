@@ -1,7 +1,7 @@
 
 CONFIDENTIAL CONFIDENTIAL CONFIDENTIAL CONFIDENTIAL CONFIDENTIAL CONFIDENTIAL CONFIDENTIAL 
 CONFIDENTIAL                                                                  CONFIDENTIAL
-CONFIDENTIAL        For distribution only to members of the PDG.              CONFIDENTIAL
+CONFIDENTIAL    For distribution only to members of the PDG and Oninoni.      CONFIDENTIAL
 CONFIDENTIAL                                                                  CONFIDENTIAL
 CONFIDENTIAL CONFIDENTIAL CONFIDENTIAL CONFIDENTIAL CONFIDENTIAL CONFIDENTIAL CONFIDENTIAL
 
@@ -11,7 +11,7 @@ CONFIDENTIAL CONFIDENTIAL CONFIDENTIAL CONFIDENTIAL CONFIDENTIAL CONFIDENTIAL CO
 ############################################################################
 Written by Zoom
 
-Source code was written by Posseidon and Oninoni (Thanks Guys!)
+Source code was written by Possseidon and Oninoni (Thanks Guys!)
 Currently maintained by Zoom
 
 ##########
