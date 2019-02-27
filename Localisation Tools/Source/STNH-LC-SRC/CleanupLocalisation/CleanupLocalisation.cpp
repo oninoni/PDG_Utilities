@@ -11,6 +11,7 @@ int main()
         L"english",
         L"french",
         L"german",
+		L"italian",
         L"polish",
         L"russian",
         L"spanish"
