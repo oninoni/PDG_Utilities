@@ -30,13 +30,13 @@ Export ALL the localisation google spreadsheets (of the mod you want to localise
 (Link: https://chrome.google.com/webstore/detail/export-sheet-data/bfdcopkbamihhchdnjghdknibmcnfplk?utm_source=permalink) 
 
 Usually it automatically puts in the right settings. If e.g. there are no check boxes ticked, please contact Zoom. 
-Because every sheet needs it's own unique settings it would be too much work to list all of them here :P
+Because every sheet needs its own unique settings it would be too much work to list all of them here :P
 
 ##############
 ### Step 3 ### 
 ##############
 
-Put the exported .JSON files into the 'Input' folder of the Localisation Creator you need.
+Put the exported .JSON files in the 'Input' folder of the Localisation Creator you need.
 (Don't worry, the deutschkorrektur_l_german.yml in there is where it should be.)
 
 ################
@@ -54,7 +54,7 @@ Your newly generated files are now located in the 'Output' folder. Just take tho
 
 IMPORTANT!
 
-ALWAYS delete the content of the mods localisation before your copy the newly generated stuff in there!
+ALWAYS delete the content of the mods localisation before you copy the newly generated stuff in there!
 
 ################################
 ###### Step 6 (If needed) ######
