@@ -10,6 +10,6 @@ MD Output\localisation\german
 MD Output\localisation\polish
 MD Output\localisation\russian
 MD Output\localisation\spanish
-STNH_CreateLocalisation
-STNH_CleanupLocalisation
+Create
+Cleanup
 pause
